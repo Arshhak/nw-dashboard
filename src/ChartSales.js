@@ -8,7 +8,7 @@ import {
   Legend
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-
+import { Table } from './Table';
 // Registering necessary components
 ChartJS.register(
   CategoryScale,
@@ -19,30 +19,31 @@ ChartJS.register(
   Legend
 );
 
+const data = [
+  {
+    "id": "1",
+    "debit": 25000,
+    "credit": 0,
+    "month": "Aug"
+  },
+  {
+    "id": "2",
+    "debit": 65000,
+    "credit": 0,
+    "month": "Sep"
+  },
+  
+  {
+    "id": "3",
+    "credit": 52000,
+    "debit": 0,
+    "month": "Sep"
+  }
+];
+
 function ChartSales() {
 
-  const data = [
-    {
-      "id": "1",
-      "debit": 25000,
-      "credit": 0,
-      "month": "Aug"
-    },
-    {
-      "id": "2",
-      "debit": 65000,
-      "credit": 0,
-      "month": "Sep"
-    },
-    
-    {
-      "id": "3",
-      "credit": 52000,
-      "debit": 0,
-      "month": "Sep"
-    }
-  ];
-
+ 
   const chartData = {
     labels: data.map(item => item.month),
     datasets: [
@@ -75,12 +76,18 @@ function ChartSales() {
       }
     }
   };
+  const DataTable = () => {
+    return (
+      <Table data={data} caption="Sales " columns={["month", "debit", "credit"]}></Table>
+    );
+  };
 
     return (
         <div>
           <div>
             <h1>Sales</h1>
             <Bar data={chartData} options={options} />
+            <DataTable  data={data}/>
           </div>
         </div>
     );

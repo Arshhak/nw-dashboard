@@ -8,7 +8,8 @@ import {
     Legend
   } from 'chart.js';
   import { Bar } from 'react-chartjs-2';
-  
+  import { Table } from './Table';
+
   // Registering necessary components
   ChartJS.register(
     CategoryScale,
@@ -19,30 +20,31 @@ import {
     Legend
   );
   
+  const dataBank = [
+    {
+      "id": "4",
+      "debit": 0,
+      "credit": 25000,
+      "month": "Aug"
+    }
+  ];
   function ChartBank() {
   
-    const data = [
-      {
-        "id": "4",
-        "debit": 0,
-        "credit": 25000,
-        "month": "Aug"
-      }
-    ];
+    
   
     const chartData = {
-      labels: data.map(item => item.month),
+      labels: dataBank?.map(item => item.month),
       datasets: [
         {
           label: 'Debit',
-          data: data.map(item => item.debit),
+          data: dataBank?.map(item => item.debit),
           backgroundColor: 'rgba(75, 192, 192, 0.2)',
           borderColor: 'rgba(75, 192, 192, 1)',
           borderWidth: 1
         },
         {
           label: 'Credit',
-          data: data.map(item => item.credit),
+          data: dataBank?.map(item => item.credit),
           backgroundColor: 'rgba(255, 99, 132, 0.2)',
           borderColor: 'rgba(255, 99, 132, 1)',
           borderWidth: 1
@@ -62,12 +64,18 @@ import {
         }
       }
     };
+    const DataTable = () => {
+      return (
+        <Table data={dataBank} caption="Bank " columns={["month", "debit", "credit"]}></Table>
+      );
+    };
   
       return (
           <div className="App">
             <div>
               <h1>Bank</h1>
               <Bar data={chartData} options={options} />
+              <DataTable data={dataBank}/>
             </div>
           </div>
       );
